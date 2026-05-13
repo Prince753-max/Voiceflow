@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azure Speech to Text Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <section class="hero-card" aria-labelledby="page-title">
+      <div class="hero-content">
+        <p class="eyebrow">Azure AI Demo</p>
+        <h1 id="page-title">Azure Speech to Text Converter</h1>
+        <p class="hero-description">
+          Convert speech from your microphone into text in real time using your own Azure AI Speech Service key,
+          region or endpoint, and preferred recognition language.
+        </p>
+      </div>
+      <div class="status-pill" id="statusBadge" aria-live="polite">Waiting</div>
+    </section>
+
+    <section class="warning-card" role="alert">
+      <strong>Security note:</strong>
+      Do not share your Azure key publicly. This demo uses your key only in your browser. For production, use a
+      secure backend server.
+    </section>
+
+    <section class="dashboard-grid">
+      <form class="settings-card card" id="settingsForm">
+        <div class="section-heading">
+          <span class="section-icon" aria-hidden="true">⚙️</span>
+          <div>
+            <h2>Speech Service Settings</h2>
+            <p>Enter your Azure credentials before recording.</p>
+          </div>
+        </div>
+
+        <label for="speechKey">Azure Speech Key</label>
+        <input
+          type="password"
+          id="speechKey"
+          autocomplete="off"
+          placeholder="Enter your Azure Speech Key"
+          aria-describedby="keyHelp"
+        />
+        <small id="keyHelp">Your key is kept in this browser session and is never hardcoded.</small>
+
+        <label for="regionOrEndpoint">Azure Region or Endpoint</label>
+        <input
+          type="text"
+          id="regionOrEndpoint"
+          autocomplete="off"
+          placeholder="Enter your Azure Region, e.g., centralindia"
+          aria-describedby="regionHelp"
+        />
+        <small id="regionHelp">Use a region such as <code>centralindia</code> or a full Speech endpoint URL.</small>
+
+        <label for="languageSelect">Recognition Language</label>
+        <select id="languageSelect">
+          <option value="en-IN">English India (en-IN)</option>
+          <option value="en-US">English US (en-US)</option>
+          <option value="hi-IN">Hindi India (hi-IN)</option>
+          <option value="en-GB">English UK (en-GB)</option>
+        </select>
+      </form>
+
+      <section class="transcription-card card" aria-labelledby="transcription-title">
+        <div class="section-heading">
+          <span class="section-icon" aria-hidden="true">🎙️</span>
+          <div>
+            <h2 id="transcription-title">Live Transcription</h2>
+            <p>Start recording and speak clearly into your microphone.</p>
+          </div>
+        </div>
+
+        <div class="button-row" aria-label="Recording controls">
+          <button type="button" class="btn btn-primary" id="startBtn">Start Recording</button>
+          <button type="button" class="btn btn-danger" id="stopBtn" disabled>Stop Recording</button>
+          <button type="button" class="btn btn-secondary" id="clearBtn">Clear Text</button>
+          <button type="button" class="btn btn-secondary" id="copyBtn">Copy Text</button>
+        </div>
+
+        <label class="sr-only" for="outputText">Converted text output</label>
+        <textarea
+          id="outputText"
+          placeholder="Your converted text will appear here..."
+          readonly
+        ></textarea>
+
+        <div class="output-meta">
+          <span id="wordCount">Words: 0</span>
+          <span id="charCount">Characters: 0</span>
+        </div>
+
+        <div class="message-box" id="messageBox" role="status" aria-live="polite">
+          Waiting for your Azure settings and microphone input.
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    Powered by Azure AI Speech Service
+  </footer>
+
+  <!-- Azure Speech SDK script is included from the Microsoft Cognitive Services Speech SDK CDN. -->
+  <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+  <script src="script.js"></script>
+</body>
+</html>
